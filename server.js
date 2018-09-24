@@ -68,8 +68,12 @@ app.post('/product/update', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
-    var sql = 'update product set title = "' + title + '", price="' + price + '" where id = ' + id;
-    res.send(sql);
+    var sql = `update product set title = ${title}, price ${price} where id = ${id}`;
+
+    // db.none
+    console.log('UPDATE:' + sql);
+    res.redirect('/products');
+    
 });
 
 console.log('App is running at http://localhost:8080');
