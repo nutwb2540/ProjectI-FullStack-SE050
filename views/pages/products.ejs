@@ -10,7 +10,7 @@
             <th><a name="" id="" class="btn btn-success" href="/insert" role="button">Add New</a></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
         <% products.forEach(function(product) { %>
         <tr>
             <td scope="row"><%= product.id %></td>
@@ -20,8 +20,9 @@
             <td><a class="btn btn-danger" href="/product_delete/<%= product.id %>" role="button">Delete</a></td>
         </tr>
         <% }); %> 
-    </tbody id="myTable">
+    </tbody>
 </table>
+
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
