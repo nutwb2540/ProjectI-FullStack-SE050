@@ -65,19 +65,44 @@ app.get('/products/:pid', function (req, res) {
 
 });
 
-app.post('/product/update', function (req, res) {
+//Update data
+app.post('/product/update',function (req, res){
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
-    var sql = `update product set title = ${title}, price ${price} where id = ${id}`;
-
-    // db.none
-    console.log('UPDATE:' + sql);
+    var sql = `update products set title = '${title}',price =${price} where id =${id}`;
+    
+    //do.none
+    db.none(sql);
+    console.log('UPDATE:'+ sql);
     res.redirect('/products');
+});
 
+
+app.get('/insert',function (req, res) {
+    res.render('pages/insert'); 
+})
+app.post('/products/insert', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
+    var sql = `INSERT INTO products (id,title,price)
+    VALUES ('${id}', '${title}', '${price}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
 });
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
     console.log('App is running on http://localhost:' + port);
 });
+
