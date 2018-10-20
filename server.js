@@ -4,6 +4,7 @@ var pgp = require('pg-promise')();
 var db = pgp('postgres://uuepmlmarbhhfz:94f26dc8d12d16c5e16d7b293d850e1f2c0629688093d36446e7dd22eed150a7@ec2-54-243-147-162.compute-1.amazonaws.com:5432/dfq2s57vtt88fe?ssl=true');
 var app = express();
 var bodyParser = require('body-parser');
+var moment = require('moment');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 /////app.use(express.static('static'));
@@ -82,10 +83,6 @@ app.post('/product/update', function (req, res) {
     res.redirect('/products');
 });
 
-
-app.get('/insert', function (req, res) {
-    res.render('pages/insert');
-})
 app.post('/products/insert', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
@@ -103,6 +100,10 @@ app.post('/products/insert', function (req, res) {
         .catch(function (error) {
             console.log('ERROR:' + error);
         })
+});
+app.get('/insert', function (req, res) {
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    res.render('pages/insert', { time: time});
 });
 
 
