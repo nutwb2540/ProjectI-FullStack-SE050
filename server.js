@@ -18,19 +18,20 @@ app.get('/about', function (req, res) {
     var bdate = '24/05/1997'
     res.render('pages/about', { fullname: name, hobbies: hobbies, bdate: bdate });
 });
+
 app.get('/products', function (req, res) {
     var id = req.param('id');
-    var sql = 'select * from products';
+    var sql = 'select* from products';
     if (id) {
-        sql += ' where id =' + id;
+        sql += ' where id =' + id + ' order by id ASC';
     }
-    db.any(sql)
+    db.any(sql + ' order by id ASC')
         .then(function (data) {
-            console.log('DATA : ' + data);
+            console.log('DATA:' + data);
             res.render('pages/products', { products: data })
         })
         .catch(function (error) {
-            console.log('ERROR : ' + error);
+            console.log('ERROR:' + error);
         })
 
 });
@@ -122,24 +123,6 @@ app.get('/product_delete/:pid', function (req, res) {
             console.log('ERROR:' + console.error);
 
         })
-});
-
-
-app.get('/products', function (req, res) {
-    var id = req.param('id');
-    var sql = 'select* from products';
-    if (id) {
-        sql += ' where id =' + id + ' order by id ASC';
-    }
-    db.any(sql + ' order by id ASC')
-        .then(function (data) {
-            console.log('DATA:' + data);
-            res.render('pages/products', { products: data })
-        })
-        .catch(function (error) {
-            console.log('ERROR:' + error);
-        })
-
 });
 
 var port = process.env.PORT || 8080;
