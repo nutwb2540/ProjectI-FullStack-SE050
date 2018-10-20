@@ -34,19 +34,22 @@ app.get('/products', function (req, res) {
         })
 
 });
-app.get('/users/:id', function (req, res) {
-    var id = req.param('id');
+
+app.get('/users', function (req, res) {
+    var id = req.params.id;
     var sql = 'select * from users';
     if (id) {
         sql += ' where id =' + id;
     }
     db.any(sql)
         .then(function (data) {
-            console.log('DATA : ' + data);
+            console.log('DATA:' + data);
             res.render('pages/users', { users: data })
+
         })
         .catch(function (error) {
-            console.log('ERROR : ' + error);
+            console.log('ERROR:' + error);
+
         })
 });
 
@@ -66,21 +69,21 @@ app.get('/products/:pid', function (req, res) {
 });
 
 
-app.post('/product/update',function (req, res){
+app.post('/product/update', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
     var sql = `update products set title = '${title}',price =${price} where id =${id}`;
-    
+
     //do.none
     db.none(sql);
-    console.log('UPDATE:'+ sql);
+    console.log('UPDATE:' + sql);
     res.redirect('/products');
 });
 
 
-app.get('/insert',function (req, res) {
-    res.render('pages/insert'); 
+app.get('/insert', function (req, res) {
+    res.render('pages/insert');
 })
 app.post('/products/insert', function (req, res) {
     var id = req.body.id;
@@ -103,23 +106,41 @@ app.post('/products/insert', function (req, res) {
 
 
 
-app.get('/product_delete/:pid',function (req, res) {
+app.get('/product_delete/:pid', function (req, res) {
     var id = req.params.pid;
     var sql = 'DELETE FROM products';
-    if (id){
-            sql += ' where id ='+ id;
+    if (id) {
+        sql += ' where id =' + id;
     }
     db.any(sql)
-        .then(function(data){
-            console.log('DATA:'+data);
+        .then(function (data) {
+            console.log('DATA:' + data);
             res.redirect('/products');
-    
+
         })
-        .catch(function(data){
-                console.log('ERROR:'+console.error);
-                
-    })
- });
+        .catch(function (data) {
+            console.log('ERROR:' + console.error);
+
+        })
+});
+
+
+app.get('/products', function (req, res) {
+    var id = req.param('id');
+    var sql = 'select* from products';
+    if (id) {
+        sql += ' where id =' + id + ' order by id ASC';
+    }
+    db.any(sql + ' order by id ASC')
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/products', { products: data })
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
