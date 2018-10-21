@@ -83,7 +83,7 @@ app.post('/product/update', function (req, res) {
     res.redirect('/products');
 });
 
-app.post('/products/insert', function (req, res) {
+app.post('/products/insert_product', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
@@ -101,9 +101,9 @@ app.post('/products/insert', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-app.get('/insert', function (req, res) {
+app.get('/insert_product', function (req, res) {
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-    res.render('pages/insert', { time: time});
+    res.render('pages/insert_product', { time: time});
 });
 
 
