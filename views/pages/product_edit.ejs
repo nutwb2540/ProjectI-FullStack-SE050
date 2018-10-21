@@ -20,6 +20,8 @@
     class="form-control" value="<%= product.price %>" name="price" id="" aria-describedby="helpId" placeholder="">
   <small id="helpId" class="form-text text-muted">Product Price</small>
 </div>
+<a name="" id="" class="btn btn-dark" href="/products" role="button">Cancel</a>
 <button type="submit" class="btn btn-success">Save</button>
+<button type="submit" class="btn btn-danger" href="/product_delete/<%= product.id %>" >Delete</button>
 </form>
 <% include ../partials/footer %>

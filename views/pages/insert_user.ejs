@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+ <form action="/users/insert_user" method="post">
+
+<div class="form-group">
+  <label for="id">ID</label>
+  <input type="number"
+    class="form-control" name="id" id="" aria-describedby="helpId" placeholder=""value="">
+  <small id="helpId" class="form-text text-muted">User ID</small>
+</div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text"
+      class="form-control" name="email" id="" aria-describedby="helpId" placeholder=""value="">
+    <small id="helpId" class="form-text text-muted">Email</small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password"
+      class="form-control" name="password" id="" aria-describedby="helpId" placeholder=""value="">
+    <small id="helpId" class="form-text text-muted">Password</small>
+    </div>
+    <div class="form-group">
+        <label for="">Time</label>
+        <input type="text"
+          class="form-control" value="<%= time %>"name="price" id="" aria-describedby="helpId" placeholder="" disabled>
+        <small id="helpId" class="form-text text-muted">Time</small>
+    </div>
+    <a name="" id="" class="btn btn-dark" href="/users" role="button">Cancel</a>
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+  <% include ../partials/footer %>
